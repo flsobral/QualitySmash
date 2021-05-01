@@ -170,6 +170,8 @@ namespace QualitySmash
 
             var itemsProcessed = new List<Item>();
 
+            var qualityTrackDict = new Dictionary<int, int>();
+
             for (var i = 0; i < containerInventory.Count; i++)
             {
                 if (containerInventory[i] == null || !(containerInventory[i] is StardewValley.Object))
@@ -209,6 +211,11 @@ namespace QualitySmash
                     // Filtering complete 
 
                     areItemsChanged = true;
+                    
+                    if (qualityTrackDict.ContainsKey(containerInventory[i].ParentSheetIndex))
+                    {
+
+                    }
 
                     if (containerInventory[i] is StardewValley.Object o)
                         o.Quality = 0;
@@ -225,7 +232,7 @@ namespace QualitySmash
             // There's probably a simpler way to do this built into the game, but I don't see it.
             // Prime the container with some of each item
             AddSomeOfEach(menu, itemsProcessed);
-            
+
             // Use a modified version of game's quick stack code to add the rest
             FillOutStacks(menu, itemsProcessed);
         }
